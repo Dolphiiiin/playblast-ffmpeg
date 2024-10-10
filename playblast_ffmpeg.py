@@ -160,6 +160,8 @@ class showUI(MayaQWidgetBaseMixin, QtWidgets.QMainWindow):
                     widget.setCurrentIndex(value)
                 elif widget_type == 'QRadioButton':
                     widget.setChecked(value)
+                elif widget_type == 'QTextEdit':
+                    widget.setPlainText(value)
                 else:
                     debug(f"Unsupported widget type: {widget_type} ({widget_name})", 'error')
         debug("Exiting reflect_optionVar_to_window", 'trace')
