@@ -89,25 +89,25 @@ class showUI(MayaQWidgetBaseMixin, QtWidgets.QMainWindow):
     ##### ウィジェットの有効無効を切り替える #####
 
     def update_custom_size_enabled(self):
-        debug("Entering update_custom_size_enabled")
+        debug("Entering update_custom_size_enabled", 'trace')
         if self.widget.size_comboBox.currentIndex() != 2:
             self.widget.customeSize_W.setEnabled(False)
             self.widget.customeSize_H.setEnabled(False)
         else:
             self.widget.customeSize_W.setEnabled(True)
             self.widget.customeSize_H.setEnabled(True)
-        debug("Exiting update_custom_size_enabled")
+        debug("Exiting update_custom_size_enabled", 'trace')
 
     # ウィンドウが閉じられるときに、optionVarに値を保存する
     def closeEvent(self, event):
-        debug("Entering closeEvent")
+        debug("Entering closeEvent", 'trace')
         self.save_widget_values_to_optionVar(self.widget_list)
-        debug("Exiting closeEvent")
+        debug("Exiting closeEvent", 'trace')
         event.accept()
 
     # ウィジェットの値をデフォルト値に戻す
     def reset_widgets(self):
-        debug("Entering reset_widgets")
+        debug("Entering reset_widgets", 'trace')
         for widget_name, widget_type, default_value in self.widget_list:
             widget = getattr(self.widget, widget_name)
             if widget_type == 'QCheckBox' or widget_type == 'QRadioButton':
@@ -121,11 +121,11 @@ class showUI(MayaQWidgetBaseMixin, QtWidgets.QMainWindow):
             elif widget_type == 'QTextEdit':
                 widget.setPlainText(default_value)
             else:
-                debug(f"Unsupported widget type: {widget_type}")
-        debug("Exiting reset_widgets")
+                debug(f"Unsupported widget type: {widget_type} ({widget_name})", 'error')
+        debug("Exiting reset_widgets", 'trace')
 
     def save_widget_values_to_optionVar(self, widget_list):
-        debug("Entering save_widget_values_to_optionVar")
+        debug("Entering save_widget_values_to_optionVar", 'trace')
         for widget_name, widget_type, _ in widget_list:
             widget = getattr(self.widget, widget_name)
             if widget_type == 'QCheckBox' or widget_type == 'QRadioButton':
@@ -139,11 +139,11 @@ class showUI(MayaQWidgetBaseMixin, QtWidgets.QMainWindow):
             elif widget_type == 'QTextEdit':
                 cmds.optionVar(stringValue=('pbff_'+widget_name, widget.toPlainText()))
             else:
-                debug(f"Unsupported widget type: {widget_type}")
-        debug("Exiting save_widget_values_to_optionVar")
+                debug(f"Unsupported widget type: {widget_type} ({widget_name})", 'error')
+        debug("Exiting save_widget_values_to_optionVar", 'trace')
 
     def reflect_optionVar_to_window(self, widget_list):
-        debug("Entering reflect_optionVar_to_window")
+        debug("Entering reflect_optionVar_to_window", 'trace')
         for widget_name, widget_type, _ in widget_list:
             if cmds.optionVar(exists='pbff_'+widget_name):
                 value = cmds.optionVar(query='pbff_'+widget_name)
@@ -161,20 +161,20 @@ class showUI(MayaQWidgetBaseMixin, QtWidgets.QMainWindow):
                 elif widget_type == 'QRadioButton':
                     widget.setChecked(value)
                 else:
-                    debug(f"Unsupported widget type: {widget_type}")
-        debug("Exiting reflect_optionVar_to_window")
+                    debug(f"Unsupported widget type: {widget_type} ({widget_name})", 'error')
+        debug("Exiting reflect_optionVar_to_window", 'trace')
 
     def savePath_locate(self):
-        debug("Entering savePath_locate")
+        debug("Entering savePath_locate", 'trace')
         # ファイルダイアログを開いて、フォルダを選択する
         savePath = QtWidgets.QFileDialog.getExistingDirectory(self, "Select Directory")
         if savePath:
             self.widget.savePath_lineEdit.setText(savePath)
-        debug("Exiting savePath_locate")
+        debug("Exiting savePath_locate", 'trace')
 
 
     def export_playblast(self):
-        debug("Entering export_playblast")
+        debug("Entering export_playblast", 'trace')
         # バリテーション
         # # fileName_lineEditが空の場合はエラーを出す
         if not self.widget.fileName_lineEdit.text():
@@ -192,7 +192,7 @@ class showUI(MayaQWidgetBaseMixin, QtWidgets.QMainWindow):
             reply = QtWidgets.QMessageBox.question(self, 'フォルダ作成確認', f'{self.widget.savePath_lineEdit.text()} は存在しません。作成しますか？',
                                                    QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No, QtWidgets.QMessageBox.No)
             if reply == QtWidgets.QMessageBox.No:
-                debug("User chose not to create the folder.")
+                debug("User chose not to create the folder.", 'info')
                 return
             os.makedirs(self.widget.savePath_lineEdit.text())
 
@@ -201,7 +201,7 @@ class showUI(MayaQWidgetBaseMixin, QtWidgets.QMainWindow):
             reply = QtWidgets.QMessageBox.question(self, 'フォルダ作成確認', f'{os.path.dirname(self.widget.exportPath_lineEdit.text())} は存在しません。作成しますか？',
                                                    QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No, QtWidgets.QMessageBox.No)
             if reply == QtWidgets.QMessageBox.No:
-                debug("User chose not to create the folder.")
+                debug("User chose not to create the folder.", 'info')
                 return
             os.makedirs(os.path.dirname(self.widget.exportPath_lineEdit.text()))
         
@@ -227,7 +227,7 @@ class showUI(MayaQWidgetBaseMixin, QtWidgets.QMainWindow):
                 reply = QtWidgets.QMessageBox.question(self, '上書き確認', f'{savePath}/{fileNmae} は既に存在します。上書きしますか？',
                                                        QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No, QtWidgets.QMessageBox.No)
                 if reply == QtWidgets.QMessageBox.No:
-                    debug("User chose not to overwrite the file.")
+                    debug("User chose not to overwrite the file.", 'info')
                     return
 
         
@@ -241,7 +241,7 @@ class showUI(MayaQWidgetBaseMixin, QtWidgets.QMainWindow):
         elif self.widget.size_comboBox.currentIndex() == 2:
             width_height = (self.widget.customeSize_W.value(), self.widget.customeSize_H.value())
         else:
-            debug("Unsupported size_comboBox index.")
+            debug("Unsupported size_comboBox index.", 'error')
             return
 
         playblast_output_path = self.widget.exportPath_lineEdit.text()
@@ -286,7 +286,7 @@ class showUI(MayaQWidgetBaseMixin, QtWidgets.QMainWindow):
         if self.widget.polygon_checkBox.isChecked():
             cmds.modelEditor(cmds.playblast(ae=True), edit=True, allObjects=True)
 
-        debug("Playblast done. Path: " + playblast_output_path)
+        debug("Playblast done. Path: " + playblast_output_path, 'info')
 
         # ffmpegでエンコード
         ffmpeg_path = ''
@@ -310,23 +310,23 @@ class showUI(MayaQWidgetBaseMixin, QtWidgets.QMainWindow):
         # ffmpegの出力を表示
         for line in iter(process.stdout.readline, ''):
             if line:
-                debug(f'ffmpeg output: {line.strip()}')
+                debug(f'ffmpeg output: {line.strip()}', 'debug')
 
         process.stdout.close()
         process.wait()  
 
         if process.returncode != 0:
             error_message = f'ffmpeg error: {process.returncode}'
-            debug(error_message)
+            debug(error_message, 'error')
             QtWidgets.QMessageBox.critical(self, "Error", error_message)
             cmds.error(error_message)
         else:
-            debug(f'ffmpeg done. Path: {savePath}/{fileNmae}')
+            debug(f'ffmpeg done. Path: {savePath}/{fileNmae}', 'info')
 
             # プレイブラスト後のファイルを削除
             if self.widget.autoDelete_checkBox.isChecked():
                 os.remove(playblast_output_path)
-                debug(f'Playblast file deleted: {playblast_output_path}')
+                debug(f'Playblast file deleted: {playblast_output_path}', 'info')
 
             # ファイルを開く
             if self.widget.openFile_checkBox.isChecked():
@@ -338,12 +338,19 @@ class showUI(MayaQWidgetBaseMixin, QtWidgets.QMainWindow):
 
 
 
-        debug("Exiting export_playblast")
+        debug("Exiting export_playblast", 'trace')
 
-def debug(log):
-    print('[playblast-ffmpeg]: '+log)
+def debug(log, level):
+    # if level == 'trace':
+    #     print('[playblast-ffmpeg] [TRACE]: '+log)
+    # if level == 'debug':
+    #     print('[playblast-ffmpeg] [DEBUG]: '+log)
+    if level == 'info':
+        print('[playblast-ffmpeg] [INFO]: '+log)
+    if level == 'error':
+        print('[playblast-ffmpeg] [ERROR]: '+log)
 
-debug('loaded playblast_ffmpeg.py')
+debug('loaded playblast_ffmpeg.py', 'info')
 
 # how to use
 # import playblast_ffmpeg
