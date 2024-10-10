@@ -28,7 +28,7 @@ playblast_ffmpeg.showUI()
 3. `Export`ボタンをクリックしてビデオをPlayblastしてエンコード
 
 ## ライセンス
-MIT License
+[MIT Licence](LICENCE.md)
 
 ---
 
@@ -58,9 +58,7 @@ playblast_ffmpeg.showUI()
 3. Click the `Export` button to playblast and encode the video
 
 ## License
-MIT License
+[MIT License](LICENCE.md)
 
-
-# Japanese
 
 
