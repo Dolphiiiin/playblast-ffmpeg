@@ -6,6 +6,8 @@ Playblast and encode with ffmpeg for Maya.
 - ffmpegでPlayblastをエンコード
 - エンコード後にPlayblastファイルを自動的に削除
 - エンコード後にファイルとフォルダを開く
+- ![image](https://github.com/user-attachments/assets/6e5ce7e5-ab40-4be3-a417-6f91c76a20a7)
+
 
 ## 環境
 - Maya 2017以降 (Maya 2025で動作確認済み)
@@ -56,6 +58,8 @@ playblast_ffmpeg.showUI()
 - Encode playblast with ffmpeg
 - Automatically delete playblast file after encoding
 - Open file and folder after encoding
+- ![image](https://github.com/user-attachments/assets/21b68134-a018-4754-a44c-4ea1b4bf1dc1)
+
 
 ## Requirements
 - Maya 2017 or later (tested on Maya 2025)
