@@ -67,6 +67,35 @@ class showUI(MayaQWidgetBaseMixin, QtWidgets.QMainWindow):
             ['ffmpegPath_lineEdit', 'QLineEdit', '']
         ]
 
+        # カメラ選択
+        # # カメラのリストを取得
+        def refresh_camera_list(self):
+            camera_list = cmds.ls(type='camera')
+            # カメラコンボボックスの値を更新し、optionVarから取得して反映
+            # optionVarのカメラが存在しない場合は、カメラコンボボックスの最初の値を選択
+            if camera_list:
+                self.widget.camera_comboBox.clear()
+                self.widget.camera_comboBox.addItems(camera_list)
+                camera_optionVar = cmds.optionVar(query='pbff_camera')
+                if camera_optionVar in camera_list:
+                    self.widget.camera_comboBox.setCurrentText(camera_optionVar)
+                else:
+                    self.widget.camera_comboBox.setCurrentIndex(0)
+            else:
+                debug("No camera found.", 'error')
+        
+        # # refresh_camera_listをメソッドとして定義
+        self.refresh_camera_list = refresh_camera_list.__get__(self)
+
+        refresh_camera_list(self)
+
+        # # refreshCamera_pushButtonが押されたときに、カメラリストを更新
+        self.widget.refreshCamera_pushButton.clicked.connect(self.refresh_camera_list)
+
+        # # カメラコンボボックスの値が変更されたときにoptionVarに保存
+        self.widget.camera_comboBox.currentIndexChanged.connect(self.save_camera_optionVar)
+        
+
         # ウィンドウが閉じられるときに、optionVarに値を保存する
         self.reflect_optionVar_to_window(self.widget_list)
 
@@ -165,6 +194,12 @@ class showUI(MayaQWidgetBaseMixin, QtWidgets.QMainWindow):
                 else:
                     debug(f"Unsupported widget type: {widget_type} ({widget_name})", 'error')
         debug("Exiting reflect_optionVar_to_window", 'trace')
+
+    def save_camera_optionVar(self):
+        debug("Entering save_camera_optionVar", 'trace')
+        camera = self.widget.camera_comboBox.currentText()
+        cmds.optionVar(stringValue=('pbff_camera', camera))
+        debug("Exiting save_camera_optionVar", 'trace')
 
     def savePath_locate(self):
         debug("Entering savePath_locate", 'trace')
@@ -267,6 +302,16 @@ class showUI(MayaQWidgetBaseMixin, QtWidgets.QMainWindow):
         if self.widget.polygon_checkBox.isChecked():
             cmds.modelEditor(cmds.playblast(ae=True), edit=True, allObjects=False, polymeshes=True)
 
+        # カメラを選択 (ビューポートウィンドウを新規作成し、そこでカメラを選択)
+        # # ビューポートウィンドウを新規作成
+        cmds.window(title='Playblast', widthHeight=(500, 500))
+        cmds.paneLayout()
+        cmds.modelPanel()
+        cmds.showWindow()
+        # # カメラを選択
+        camera = self.widget.camera_comboBox.currentText()
+        cmds.lookThru(camera)
+        
         # playblast_output_pathのファイルが存在する場合、削除する
         if os.path.exists(playblast_output_path):
             try:
@@ -287,6 +332,9 @@ class showUI(MayaQWidgetBaseMixin, QtWidgets.QMainWindow):
         # プレイブラスト後に元の表示設定に戻す
         if self.widget.polygon_checkBox.isChecked():
             cmds.modelEditor(cmds.playblast(ae=True), edit=True, allObjects=True)
+
+        # ビューポートウィンドウを削除
+        cmds.deleteUI('Playblast')
 
         debug("Playblast done. Path: " + playblast_output_path, 'info')
 
