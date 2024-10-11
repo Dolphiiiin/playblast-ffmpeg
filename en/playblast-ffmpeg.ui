@@ -197,7 +197,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>更新</string>
+       <string>Refresh</string>
       </property>
      </widget>
      <widget class="QLabel" name="camera_label">
