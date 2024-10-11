@@ -740,56 +740,11 @@ p, li { white-space: pre-wrap; }
     </property>
     <addaction name="reset_action"/>
    </widget>
-   <widget class="QMenu" name="menu_2">
-    <property name="title">
-     <string>ヘルプ</string>
-    </property>
-    <addaction name="actionPlayblast_FFmpeg"/>
-    <addaction name="actionV1_0_2"/>
-   </widget>
-   <widget class="QMenu" name="menuLanguage">
-    <property name="title">
-     <string>Language</string>
-    </property>
-    <addaction name="actionEnglish"/>
-    <addaction name="actionJapanese"/>
-   </widget>
    <addaction name="menu"/>
-   <addaction name="menuLanguage"/>
-   <addaction name="menu_2"/>
   </widget>
   <action name="reset_action">
    <property name="text">
     <string>設定のリセット</string>
-   </property>
-  </action>
-  <action name="actionPlayblast_FFmpeg">
-   <property name="text">
-    <string>Playblast FFmpeg</string>
-   </property>
-  </action>
-  <action name="actionV1_0_2">
-   <property name="text">
-    <string>v1.0.2</string>
-   </property>
-  </action>
-  <action name="actionJapanese">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>日本語</string>
-   </property>
-  </action>
-  <action name="actionEnglish">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="checked">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>English</string>
    </property>
   </action>
  </widget>
