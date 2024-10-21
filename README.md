@@ -6,8 +6,6 @@ Playblast and encode with ffmpeg for Maya.
 - ffmpegでPlayblastをエンコード
 - エンコード後にPlayblastファイルを自動的に削除
 - エンコード後にファイルとフォルダを開く
-- ![image](https://github.com/user-attachments/assets/6e5ce7e5-ab40-4be3-a417-6f91c76a20a7)
-
 
 ## 環境
 - Maya 2017以降 (Maya 2025で動作確認済み)
@@ -15,16 +13,10 @@ Playblast and encode with ffmpeg for Maya.
 - ffmpeg
 
 ## インストール
-1. [Release](https://github.com/Dolphiiiin/playblast-ffmpeg/releases)から最新バージョンの`playblast-ffmpeg.py`をダウンロード
-2. 公式サイトから`ffmpeg`実行ファイルをダウンロード: https://ffmpeg.org/download.html
-3. ダウンロードしたスクリプトと`ffmpeg`実行ファイルをMayaの`scripts`ディレクトリに配置
-(日本語版Mayaでは`C:\Users\{UserName}\Documents\maya\{Version}\ja_JP\scripts`に配置します)
-<details><summary>v1.0.2以前</summary>
 1. `playblast-ffmpeg.py`と`playblast-ffmpeg.ui`ファイルをダウンロード
 2. 公式サイトから`ffmpeg`実行ファイルをダウンロード: https://ffmpeg.org/download.html
 3. ダウンロードしたスクリプトと`ffmpeg`実行ファイルをMayaの`scripts`ディレクトリに配置
 (日本語版Mayaでは`C:\Users\{UserName}\Documents\maya\{Version}\ja_JP\scripts`に配置します)
-</details>
 
 ## 使い方
 1. Mayaのスクリプトエディタで以下のコードを実行:
@@ -64,8 +56,6 @@ playblast_ffmpeg.showUI()
 - Encode playblast with ffmpeg
 - Automatically delete playblast file after encoding
 - Open file and folder after encoding
-- ![image](https://github.com/user-attachments/assets/21b68134-a018-4754-a44c-4ea1b4bf1dc1)
-
 
 ## Requirements
 - Maya 2017 or later (tested on Maya 2025)
@@ -73,18 +63,10 @@ playblast_ffmpeg.showUI()
 - ffmpeg
 
 ## Installation
-1. Download the latest version of `playblast-ffmpeg.py` from [Release](https://github.com/Dolphiiiin/playblast-ffmpeg/releases)
-2. Download the `ffmpeg` executable from the official website: https://ffmpeg.org/download.html
-3. Place the downloaded script and `ffmpeg` executable in Maya's `scripts` directory
-(For Japanese version of Maya, place in `C:\Users\{UserName}\Documents\maya\{Version}\ja_JP\scripts`)
-<details><summary>v1.0.2 and earlier</summary>
 1. Download the `playblast-ffmpeg.py` and `playblast-ffmpeg.ui` files
-2. Download the `ffmpeg` executable from the official website: https://ffmpeg.org/download.html
-3. Place the downloaded script and `ffmpeg` executable file in Maya's `scripts` directory
-
-(For the Japanese version of Maya, place it in `C:\Users\{UserName}\Documents\maya\{Version}\ja_JP\scripts`)
-
-</details>
+(English ui files are located in the `en` folder)
+2. Download the `ffmpeg` executable from the official site: https://ffmpeg.org/download.html
+3. Place the downloaded scripts and the `ffmpeg` executable in the Maya `scripts` directory
 
 ## Usage
 1. Run the following code in the Maya script editor:
@@ -116,3 +98,15 @@ playblast_ffmpeg.showUI()
 
 ## License
 [MIT License](LICENCE.md)
+
+
+# Build
+`action.py`を実行することで`# loadUI: playblast-ffmpeg.ui`と書かれている箇所に、pyuic5で生成したPythonコードを、変換して挿入します。
+```bash
+sudo apt update
+sudo apt install -y python3-pyqt5
+sudo apt install -y pyqt5-dev-tools
+sudo apt install -y qttools5-dev-tools
+
+python3 ./action.py
+```
