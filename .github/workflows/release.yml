@@ -39,11 +39,19 @@ jobs:
     - name: Rename builded.py to playblast_ffmpeg.py
       run: mv builded.py playblast_ffmpeg.py
 
+    - name: Commit generated script
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git add playblast_ffmpeg.py
+        git commit -m "Add generated playblast_ffmpeg.py"
+        git push origin HEAD:${{ github.head_ref }}
+
     - name: Comment on PR with playblast_ffmpeg.py content
       run: |
-        gh auth login --with-token <<< "${{ secrets.GITHUB_TOKEN }}"
-        CONTENT=$(cat playblast_ffmpeg.py)
-        COMMENT_BODY="\`\`\`$CONTENT\n\`\`\`"
+         gh auth login --with-token <<< "${{ secrets.GITHUB_TOKEN }}"
+        FILE_URL="https://github.com/${{ github.repository }}/blob/${{ github.head_ref }}/playblast_ffmpeg.py"
+        COMMENT_BODY="### Generated playblast_ffmpeg.py\n[View the file]($FILE_URL)"
         gh pr comment ${{ github.event.pull_request.number }} --body "$COMMENT_BODY"
 
   release:
