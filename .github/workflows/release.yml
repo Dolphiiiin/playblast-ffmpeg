@@ -38,14 +38,8 @@ jobs:
 
     - name: Comment on PR with playblast_ffmpeg.py content
       run: |
-        CONTENT=$(cat playblast_ffmpeg.py)
-        COMMENT="### Generated playblast_ffmpeg.py\n\`\`\`python\n$CONTENT\n\`\`\`"
-        PAYLOAD=$(echo '{}' | jq --arg body "$COMMENT" '.body = $body')
-        curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-             -H "Content-Type: application/json" \
-             -X POST \
-             -d "$PAYLOAD" \
-             "${{ github.event.pull_request.url }}/comments"
+            gh auth login --with-token <<< "${{ secrets.GITHUB_TOKEN }}"
+            gh pr comment ${{ github.event.pull_request.number }} --body "### Generated playblast_ffmpeg.py" --attach playblast_ffmpeg.py
 
   release:
     needs: build
