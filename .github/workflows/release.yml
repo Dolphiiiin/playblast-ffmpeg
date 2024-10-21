@@ -33,6 +33,20 @@ jobs:
     - name: Run action.py
       run: python action.py
 
+    - name: Rename builded.py to playblast_ffmpeg.py
+      run: mv builded.py playblast_ffmpeg.py
+
+    - name: Comment on PR with playblast_ffmpeg.py content
+      run: |
+        CONTENT=$(cat playblast_ffmpeg.py)
+        COMMENT="### Generated playblast_ffmpeg.py\n\`\`\`python\n$CONTENT\n\`\`\`"
+        PAYLOAD=$(echo '{}' | jq --arg body "$COMMENT" '.body = $body')
+        curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+             -H "Content-Type: application/json" \
+             -X POST \
+             -d "$PAYLOAD" \
+             "${{ github.event.pull_request.url }}/comments"
+
   release:
     needs: build
     runs-on: ubuntu-latest
