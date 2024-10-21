@@ -43,7 +43,8 @@ jobs:
       run: |
         gh auth login --with-token <<< "${{ secrets.GITHUB_TOKEN }}"
         CONTENT=$(cat playblast_ffmpeg.py)
-        gh pr comment ${{ github.event.pull_request.number }} --body "### Generated playblast_ffmpeg.py\n\`\`\`python\n$CONTENT\n\`\`\`"
+        COMMENT_BODY="### Generated playblast_ffmpeg.py\n\`\`\`python\n$CONTENT\n\`\`\`"
+        gh pr comment ${{ github.event.pull_request.number }} --body "$COMMENT_BODY"
 
   release:
     needs: build
