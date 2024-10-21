@@ -49,7 +49,7 @@ jobs:
 
     - name: Comment on PR with playblast_ffmpeg.py content
       run: |
-         gh auth login --with-token <<< "${{ secrets.GITHUB_TOKEN }}"
+        gh auth login --with-token <<< "${{ secrets.GITHUB_TOKEN }}"
         FILE_URL="https://github.com/${{ github.repository }}/blob/${{ github.head_ref }}/playblast_ffmpeg.py"
         COMMENT_BODY="### Generated playblast_ffmpeg.py\n[View the file]($FILE_URL)"
         gh pr comment ${{ github.event.pull_request.number }} --body "$COMMENT_BODY"
