@@ -50,7 +50,6 @@ jobs:
     - name: Update and upgrade apt packages
       run: |
         sudo apt update
-        sudo apt upgrade -y
 
     - name: Install required apt packages
       run: |
