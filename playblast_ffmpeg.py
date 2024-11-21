@@ -374,7 +374,7 @@ class showUI(MayaQWidgetBaseMixin, QtWidgets.QMainWindow):
 
         ffmpeg_command = f'"{ffmpeg_path}" -i "{playblast_output_path}" {ffmpeg_option} "{savePath}/{fileNmae}"'
         process = subprocess.Popen(ffmpeg_command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
-                                   universal_newlines=True)
+                                   universal_newlines=True, encoding='utf-8')
 
         # ffmpegの出力を表示
         for line in iter(process.stdout.readline, ''):
