@@ -85,17 +85,17 @@
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
-        <x>40</x>
+        <x>5</x>
         <y>10</y>
-        <width>208</width>
+        <width>211</width>
         <height>22</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
-        <widget class="QLabel" name="label_2">
+        <widget class="QLabel" name="size_label">
          <property name="text">
-          <string>Display size</string>
+          <string>Display Size</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -108,7 +108,7 @@
           <bool>false</bool>
          </property>
          <property name="currentIndex">
-          <number>0</number>
+          <number>1</number>
          </property>
          <item>
           <property name="text">
@@ -122,7 +122,7 @@
          </item>
          <item>
           <property name="text">
-           <string>Cusome</string>
+           <string>Custom</string>
           </property>
          </item>
         </widget>
@@ -140,7 +140,7 @@
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
-        <widget class="QLabel" name="label_8">
+        <widget class="QLabel" name="scale_label">
          <property name="text">
           <string>Scale</string>
          </property>
@@ -163,9 +163,9 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="label_9">
+        <widget class="QLabel" name="padding_label">
          <property name="text">
-          <string>Frame padding</string>
+          <string>Frame Padding</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -190,8 +190,8 @@
      <widget class="QPushButton" name="refreshCamera_pushButton">
       <property name="geometry">
        <rect>
-        <x>286</x>
-        <y>89</y>
+        <x>290</x>
+        <y>90</y>
         <width>51</width>
         <height>21</height>
        </rect>
@@ -203,10 +203,10 @@
      <widget class="QLabel" name="camera_label">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>90</y>
+        <x>4</x>
+        <y>91</y>
         <width>91</width>
-        <height>16</height>
+        <height>20</height>
        </rect>
       </property>
       <property name="text">
@@ -219,8 +219,8 @@
      <widget class="QComboBox" name="camera_comboBox">
       <property name="geometry">
        <rect>
-        <x>106</x>
-        <y>89</y>
+        <x>110</x>
+        <y>90</y>
         <width>171</width>
         <height>20</height>
        </rect>
@@ -232,6 +232,13 @@
        <number>-1</number>
       </property>
      </widget>
+     <zorder>layoutWidget</zorder>
+     <zorder>layoutWidget</zorder>
+     <zorder>layoutWidget</zorder>
+     <zorder>layoutWidget_2</zorder>
+     <zorder>camera_comboBox</zorder>
+     <zorder>refreshCamera_pushButton</zorder>
+     <zorder>padding_spin</zorder>
     </widget>
     <widget class="QGroupBox" name="groupBox_2">
      <property name="geometry">
@@ -245,17 +252,17 @@
      <property name="title">
       <string/>
      </property>
-     <widget class="QLabel" name="label_4">
+     <widget class="QLabel" name="decoration_label">
       <property name="geometry">
        <rect>
-        <x>0</x>
+        <x>10</x>
         <y>10</y>
-        <width>101</width>
-        <height>16</height>
+        <width>91</width>
+        <height>20</height>
        </rect>
       </property>
       <property name="text">
-       <string>Show ornaments</string>
+       <string>Show Decorations</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -293,17 +300,17 @@
        <number>100</number>
       </property>
      </widget>
-     <widget class="QLabel" name="label">
+     <widget class="QLabel" name="percent_label">
       <property name="geometry">
        <rect>
-        <x>53</x>
+        <x>13</x>
         <y>30</y>
-        <width>51</width>
+        <width>91</width>
         <height>20</height>
        </rect>
       </property>
       <property name="text">
-       <string>Quality</string>
+       <string>Accuracy</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -312,7 +319,7 @@
      <widget class="QCheckBox" name="polygon_checkBox">
       <property name="geometry">
        <rect>
-        <x>310</x>
+        <x>270</x>
         <y>10</y>
         <width>16</width>
         <height>16</height>
@@ -322,17 +329,17 @@
        <string/>
       </property>
      </widget>
-     <widget class="QLabel" name="label_5">
+     <widget class="QLabel" name="polygon_label">
       <property name="geometry">
        <rect>
-        <x>170</x>
+        <x>150</x>
         <y>10</y>
-        <width>131</width>
+        <width>111</width>
         <height>16</height>
        </rect>
       </property>
       <property name="text">
-       <string>Display polygons only</string>
+       <string>Show Only Polygons</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -351,7 +358,7 @@
      <property name="title">
       <string/>
      </property>
-     <widget class="QLabel" name="label_6">
+     <widget class="QLabel" name="overWrite_label">
       <property name="geometry">
        <rect>
         <x>20</x>
@@ -361,7 +368,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>Save Overwrite</string>
+       <string>Overwrite Save</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -393,7 +400,7 @@
        </rect>
       </property>
      </widget>
-     <widget class="QLabel" name="label_7">
+     <widget class="QLabel" name="savePath_label">
       <property name="geometry">
        <rect>
         <x>20</x>
@@ -403,7 +410,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>save path</string>
+       <string>Save Path</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -422,7 +429,7 @@
        <string>...</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_10">
+     <widget class="QLabel" name="openFile_label">
       <property name="geometry">
        <rect>
         <x>20</x>
@@ -432,7 +439,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>Open video</string>
+       <string>Open Video</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -454,7 +461,7 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_11">
+     <widget class="QLabel" name="openFolder_label">
       <property name="geometry">
        <rect>
         <x>20</x>
@@ -464,7 +471,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>Open folder</string>
+       <string>Open Folder</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -483,7 +490,7 @@
        <string/>
       </property>
      </widget>
-     <widget class="QLabel" name="label_14">
+     <widget class="QLabel" name="fileName_label">
       <property name="geometry">
        <rect>
         <x>20</x>
@@ -493,7 +500,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>file name</string>
+       <string>File Name</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -523,6 +530,10 @@
       </property>
      </widget>
     </widget>
+    <zorder>groupBox</zorder>
+    <zorder>groupBox_2</zorder>
+    <zorder>groupBox_4</zorder>
+    <zorder>groupBox_5</zorder>
    </widget>
    <widget class="QGroupBox" name="groupBox_5">
     <property name="geometry">
@@ -559,10 +570,10 @@
       </property>
       <property name="html">
        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS UI Gothic'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;-y -vcodec libx264 -pix_fmt yuv420p -crf 23 -acodec aac -strict -2 -b:a 384k -movflags faststart &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        p, li { white-space: pre-wrap; }
+        &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS UI Gothic'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+        &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;-y -vcodec libx264 -pix_fmt yuv420p -crf 23 -acodec aac -strict -2 -b:a 384k -movflags faststart &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
     </widget>
@@ -709,6 +720,10 @@ p, li { white-space: pre-wrap; }
      <string>Export</string>
     </property>
    </widget>
+   <zorder>groupBox_3</zorder>
+   <zorder>groupBox_5</zorder>
+   <zorder>export_pushButton</zorder>
+   <zorder>groupBox_4</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -725,35 +740,11 @@ p, li { white-space: pre-wrap; }
     </property>
     <addaction name="reset_action"/>
    </widget>
-   <widget class="QMenu" name="menuLanguage">
-    <property name="title">
-     <string>Language</string>
-    </property>
-    <addaction name="language_ja_action"/>
-    <addaction name="language_en_action"/>
-   </widget>
    <addaction name="menu"/>
-   <addaction name="menuLanguage"/>
   </widget>
   <action name="reset_action">
    <property name="text">
     <string>Reset Settings</string>
-   </property>
-  </action>
-  <action name="language_ja_action">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>日本語</string>
-   </property>
-  </action>
-  <action name="language_en_action">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>English</string>
    </property>
   </action>
  </widget>

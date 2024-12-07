@@ -34,17 +34,30 @@ jobs:
       with:
         python-version: '3.x'
 
-    - name: Run action.py
-      run: python action.py
+    - name: Run action.py for English UI
+      run: python action.py en
 
-    - name: Rename builded.py to playblast_ffmpeg.py
-      run: mv builded.py playblast_ffmpeg.py
+    - name: Run action.py for Japanese UI
+      run: python action.py ja
 
-    - name: Upload artifact
+    - name: Rename builded_en.py to playblast_ffmpeg_en.py
+      run: mv builded_en.py playblast_ffmpeg_en.py
+
+    - name: Rename builded_ja.py to playblast_ffmpeg_ja.py
+      run: mv builded_ja.py playblast_ffmpeg_ja.py
+
+    - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: playblast_ffmpeg
-        path: playblast_ffmpeg.py
+        name: playblast_ffmpeg_en
+        path: playblast_ffmpeg_en.py
+        retention-days: 5
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: playblast_ffmpeg_ja
+        path: playblast_ffmpeg_ja.py
         retention-days: 5
 
     - name: Comment PR
@@ -57,7 +70,7 @@ jobs:
             issue_number: context.issue.number,
             owner: context.repo.owner,
             repo: context.repo.repo,
-            body: 'Script Generated.\n\n[open](https://github.com/${{github.repository}}/actions/runs/${{github.run_id}})'
+            body: 'Scripts Generated.\n\n[open](https://github.com/${{github.repository}}/actions/runs/${{github.run_id}})'
           })
 
   release:
@@ -84,11 +97,17 @@ jobs:
       with:
         python-version: '3.x'
 
-    - name: Run action.py
-      run: python action.py
+    - name: Run action.py for English UI
+      run: python action.py en
 
-    - name: Rename builded.py to playblast_ffmpeg.py
-      run: mv builded.py playblast_ffmpeg.py
+    - name: Run action.py for Japanese UI
+      run: python action.py ja
+
+    - name: Rename builded_en.py to playblast_ffmpeg_en.py
+      run: mv builded_en.py playblast_ffmpeg_en.py
+
+    - name: Rename builded_ja.py to playblast_ffmpeg_ja.py
+      run: mv builded_ja.py playblast_ffmpeg_ja.py
 
     - name: Create Release
       id: create_release
@@ -101,12 +120,22 @@ jobs:
         draft: false
         prerelease: false
 
-    - name: Upload Release Asset
+    - name: Upload Release Asset for English UI
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: playblast_ffmpeg.py
-        asset_name: playblast_ffmpeg.py
+        asset_path: playblast_ffmpeg_en.py
+        asset_name: playblast_ffmpeg_en.py
+        asset_content_type: application/octet-stream
+
+    - name: Upload Release Asset for Japanese UI
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: playblast_ffmpeg_ja.py
+        asset_name: playblast_ffmpeg_ja.py
         asset_content_type: application/octet-stream
