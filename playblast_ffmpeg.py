@@ -23,7 +23,7 @@ from maya.app.general.mayaMixin import MayaQWidgetBaseMixin
 
 
 
-# loadUI: playblast-ffmpeg.ui
+# loadUI
 
 
 class showUI(MayaQWidgetBaseMixin, QtWidgets.QMainWindow):

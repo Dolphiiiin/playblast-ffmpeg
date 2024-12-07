@@ -1,13 +1,14 @@
 import os
 import re
 import subprocess
+import sys
 
-def get_ui_file_name(py_file_path):
+def get_ui_file_name(py_file_path, prefix):
     with open(py_file_path, 'r', encoding='utf-8') as file:
         content = file.read()
-    match = re.search(r'# loadUI: (.+\.ui)', content)
+    match = re.search(r'# loadUI', content)
     if match:
-        return match.group(1)
+        return f'playblast-ffmpeg_{prefix}.ui'
     else:
         raise ValueError("UI file name not found in the specified Python file.")
 
@@ -36,7 +37,7 @@ def insert_formatted_code(py_file_path, formatted_code):
     # Find the comment line to insert the formatted code after
     insert_index = 0
     for i, line in enumerate(lines):
-        if line.strip().startswith('# loadUI:'):
+        if line.strip().startswith('# loadUI'):
             insert_index = i + 1
             break
 
@@ -44,22 +45,25 @@ def insert_formatted_code(py_file_path, formatted_code):
 
     return ''.join(new_content)
 
-def main():
+def main(prefix):
     py_file_path = 'playblast_ffmpeg.py'
-    ui_file_name = get_ui_file_name(py_file_path)
+    ui_file_name = get_ui_file_name(py_file_path, prefix)
     ui_file_path = os.path.join(os.path.dirname(py_file_path), ui_file_name)
-    output_py_file_path = 'temp_ui.py'
+    output_py_file_path = f'temp_ui_{prefix}.py'
 
     convert_ui_to_py(ui_file_path, output_py_file_path)
     formatted_code = format_py_file(output_py_file_path)
     new_content = insert_formatted_code(py_file_path, formatted_code)
 
-    # Save the result to builded.py
-    with open('builded.py', 'w', encoding='utf-8') as file:
+    # Save the result to builded_{prefix}.py
+    with open(f'builded_{prefix}.py', 'w', encoding='utf-8') as file:
         file.write(new_content)
 
     # Clean up temporary file
     os.remove(output_py_file_path)
 
 if __name__ == "__main__":
-    main()
+    if len(sys.argv) != 2:
+        print("Usage: python action.py <prefix>")
+        sys.exit(1)
+    main(sys.argv[1])
