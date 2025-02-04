@@ -13,7 +13,7 @@ Playblast and encode with ffmpeg for Maya.
 - ffmpeg
 
 ## インストール
-1. `playblast-ffmpeg.py`と`playblast-ffmpeg.ui`ファイルをダウンロード
+1. `playblast-ffmpeg.py`を[Releases](https://github.com/Dolphiiiin/playblast-ffmpeg/releases)からダウンロード
 2. 公式サイトから`ffmpeg`実行ファイルをダウンロード: https://ffmpeg.org/download.html
 3. ダウンロードしたスクリプトと`ffmpeg`実行ファイルをMayaの`scripts`ディレクトリに配置
 (日本語版Mayaでは`C:\Users\{UserName}\Documents\maya\{Version}\ja_JP\scripts`に配置します)
